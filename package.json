@@ -1,0 +1,39 @@
+{
+  "name": "make-my-playlist",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "@types/spotify-web-api-node": "^5.0.3",
+    "react-scripts": "^3.0.1",
+    "typescript": "^3.9.10"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "rc-slider": "^9.7.4",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.6.4",
+    "react-dom": "^16.8.6",
+    "spotify-web-api-node": "^5.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

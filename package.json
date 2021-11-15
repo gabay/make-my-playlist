@@ -16,6 +16,7 @@
     "react": "^16.8.6",
     "react-bootstrap": "^1.6.4",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^6.0.2",
     "spotify-web-api-node": "^5.0.2"
   },
   "scripts": {

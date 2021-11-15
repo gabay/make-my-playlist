@@ -37,8 +37,21 @@ export default class Spotify {
     }, handleError);
   }
 
+  async getNewReleases(options: any): Promise<any> {
+    return this.spotify.getNewReleases(options).then((result) => {
+      logResult("getNewReleases", result);
+      return result.body.albums.items;
+    }, handleError);
+  }
+
+  async getAlbumTracks(albumId: string): Promise<any> {
+    return this.spotify.getAlbumTracks(albumId).then((result) => {
+      logResult("getAlbumTracks", result);
+      return result.body.items;
+    }, handleError);
+  }
+
   async getRecommendations(options: any): Promise<any> {
-    console.log(options);
     return this.spotify.getRecommendations(options).then((result) => {
       logResult("getRecommendations", result);
       return result.body.tracks;

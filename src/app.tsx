@@ -2,10 +2,10 @@ import React from "react";
 import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Discography from "./discography";
 import { login } from "./login";
 import MakeMyPlaylist from "./makeMyPlaylist";
 import PreviewAlbums from "./previewAlbums";
-import Discography from "./discography";
 import Token from "./token";
 
 function Login() {

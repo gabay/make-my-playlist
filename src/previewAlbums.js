@@ -1,126 +1,15 @@
-import debounce from "lodash/debounce";
 import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap.css";
 import React from "react";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import Spotify from "./spotify";
 import Token from "./token";
-import { smallsetImage, trim } from "./util";
+import SearchBar from "./searchBar";
+import Albums from "./albums";
+import Tracks from "./tracks";
+
 
 const spotify = new Spotify(Token.fromLocalStorage());
-
-class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.onChangeDebounced = debounce(this.onChange, 500);
-  }
-
-  render() {
-    return (
-      <>
-        <Form.Control
-          onChange={(event) => this.onChangeDebounced(event.target.value)}
-        />
-      </>
-    );
-  }
-
-  onChange(value) {
-    this.props.onChange(value);
-  }
-}
-
-class InProgress extends React.Component {
-  render() {
-    return (
-      <>
-        <div className="spinner-border text-success" role="status" />
-      </>
-    );
-  }
-}
-
-class FlexWrap extends React.Component {
-  render() {
-    return (
-      <div className="d-flex flex-row flex-wrap">{this.props.children}</div>
-    );
-  }
-}
-
-class ClickableItem extends React.Component {
-  // Render a button from the given name, images, and isActive.
-  render() {
-    return (
-      <Button
-        variant="outline-dark"
-        active={this.props.isActive}
-        style={{ width: "8rem", boxShadow: "none" }}
-        onClick={() => this.props.onClick()}
-      >
-        {this.renderImage()}
-        <h5>{trim(this.props.name, 30)}</h5>
-      </Button>
-    );
-  }
-
-  renderImage() {
-    if (this.props.images === undefined) {
-      return <></>;
-    } else {
-      const image = smallsetImage(this.props.images);
-      const imageSrc = image !== null ? image.url : "placeholder.png";
-      return (
-        <img width="64" height="64" className="rounded" src={imageSrc} alt="" />
-      );
-    }
-  }
-}
-
-class Albums extends React.Component {
-  render() {
-    if (this.props.albums === undefined) {
-      return <InProgress />;
-    } else {
-      return (
-        <FlexWrap>
-          {this.props.albums.map((album, index) => (
-            <ClickableItem
-              key={index}
-              name={album.name}
-              images={album.images}
-              isActive={this.props.pickedAlbum === album}
-              onClick={() => this.props.onClick(index)}
-            />
-          ))}
-        </FlexWrap>
-      );
-    }
-  }
-}
-
-class Tracks extends React.Component {
-  render() {
-    if (this.props.tracks === undefined) {
-      return <InProgress />;
-    } else {
-      return (
-        <FlexWrap>
-          {this.props.tracks.map((track, index) => (
-            <ClickableItem
-              key={index}
-              name={track.name}
-              isActive={this.props.pickedTracks.includes(track)}
-              onClick={() => this.props.onClick(index)}
-            />
-          ))}
-        </FlexWrap>
-      );
-    }
-  }
-}
 
 class TracksPlayer extends React.Component {
   constructor(props) {

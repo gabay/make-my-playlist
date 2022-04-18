@@ -9,6 +9,7 @@ import FeatureSliderWithToggleButton from "./featureSlider";
 import { logout } from "./login";
 import Spotify from "./spotify";
 import Token from "./token";
+import Artists from "./artists";
 import { randomElement, smallsetImage, toggleElement, trim } from "./util";
 
 // TODO:
@@ -118,28 +119,6 @@ class ClickableItem extends React.Component {
       const imageSrc = image !== null ? image.url : "placeholder.png";
       return (
         <img width="64" height="64" className="rounded" src={imageSrc} alt="" />
-      );
-    }
-  }
-}
-
-class Artists extends React.Component {
-  render() {
-    if (this.props.artists === undefined) {
-      return <InProgress />;
-    } else {
-      return (
-        <FlexWrap>
-          {this.props.artists.map((artist, index) => (
-            <ClickableItem
-              key={index}
-              name={artist.name}
-              images={artist.images}
-              isActive={this.props.pickedArtists.includes(artist)}
-              onClick={() => this.props.onClick(index)}
-            />
-          ))}
-        </FlexWrap>
       );
     }
   }

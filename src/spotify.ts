@@ -16,8 +16,8 @@ export default class Spotify {
     })
   }
 
-  async getMyTopArtists(): Promise<any> {
-    return this.spotify.getMyTopArtists({ limit: 50 }).then((result) => {
+  async getMyTopArtists(limit: number = 50): Promise<any> {
+    return this.spotify.getMyTopArtists({ limit: limit }).then((result) => {
       logResult("getMyTopArtists", result);
       return result.body.items;
     }, handleError);
@@ -27,6 +27,13 @@ export default class Spotify {
     return this.spotify.getFollowedArtists({ limit: 50 }).then((result) => {
       logResult("getFollowedArtists", result);
       return result.body.artists.items;
+    }, handleError);
+  }
+
+  async getArtistAlbums(artistId: string, options: any): Promise<any> {
+    return this.spotify.getArtistAlbums(artistId, options).then((result) => {
+      logResult("getArtistAlbums", result);
+      return result.body.items;
     }, handleError);
   }
 
@@ -41,6 +48,13 @@ export default class Spotify {
     return this.spotify.getNewReleases(options).then((result) => {
       logResult("getNewReleases", result);
       return result.body.albums.items;
+    }, handleError);
+  }
+
+  async getAlbums(albumIds: string[]): Promise<any> {
+    return this.spotify.getAlbums(albumIds).then((result) => {
+      logResult("getAlbums", result);
+      return result.body.albums;
     }, handleError);
   }
 
@@ -73,6 +87,9 @@ export default class Spotify {
   }
 
   async addTracksToPlaylist(playlistId: string, tracks: any[], options: any): Promise<any> {
+    if (tracks.length > 100) {
+      return this.addTracksToPlaylist(playlistId, tracks.slice(0, 100), options).then((result) => this.addTracksToPlaylist(playlistId, tracks.slice(100), options), handleError);
+    }
     const trackURIs = tracks.map((track) => track.uri);
     return this.spotify
       .addTracksToPlaylist(playlistId, trackURIs, options)
